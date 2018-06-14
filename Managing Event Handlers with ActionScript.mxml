@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+			   xmlns:s="library://ns.adobe.com/flex/spark" 
+			   xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script><![CDATA[
+		
+		private function addRemoveHandlers():void {
+			
+			if (showAnswers.selected == true) {
+				question1.addEventListener(MouseEvent.MOUSE_OVER, showAnswer);
+				question2.addEventListener(MouseEvent.MOUSE_OVER, showAnswer);
+				question3.addEventListener(MouseEvent.MOUSE_OVER, showAnswer);
+				question1.addEventListener(MouseEvent.MOUSE_OUT, clearAnswer);
+				question2.addEventListener(MouseEvent.MOUSE_OUT, clearAnswer);
+				question3.addEventListener(MouseEvent.MOUSE_OUT, clearAnswer);
+			} else {
+				question1.removeEventListener(MouseEvent.MOUSE_OVER, showAnswer);
+				question2.removeEventListener(MouseEvent.MOUSE_OVER, showAnswer);
+				question3.removeEventListener(MouseEvent.MOUSE_OVER, showAnswer);
+				question1.removeEventListener(MouseEvent.MOUSE_OUT, clearAnswer);
+				question2.removeEventListener(MouseEvent.MOUSE_OUT, clearAnswer);
+				question3.removeEventListener(MouseEvent.MOUSE_OUT, clearAnswer);
+			}
+			
+		}
+		
+		private function showAnswer(event:MouseEvent):void {
+			var answer:String = '';
+			switch (event.target.id) {
+				case 'question1':
+					answer = '4';
+					break;
+				case 'question2':
+					answer = '25';
+					break;
+				case 'question3':
+					answer = '1';
+					break;
+			}
+			answerLabel.text = answer;
+		}
+		
+		private function clearAnswer(event:MouseEvent):void {
+			answerLabel.text = '';
+		}
+		
+	]]></fx:Script>
+	
+	<s:VGroup x="10" y="10" gap="20">
+		<s:CheckBox id="showAnswers" change="addRemoveHandlers();" label="Show Answers on Mouseover?" />
+		<s:Label id="question1" text="2 + 2 = ???" />
+		<s:Label id="question2" text="5 * 5 = ???" />
+		<s:Label id="question3" text="9 % 4 = ??? " />
+		<s:Label text="Answer: " />
+		<s:Label id="answerLabel" fontSize="20" />
+	</s:VGroup>
+	
+</s:Application>
